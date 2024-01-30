@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "lib": ["esnext"],
     "allowJs": true,
 
@@ -23,6 +24,6 @@
     "resolveJsonModule": true
   },
 
-  "include": ["src/**/*", "src/**/*.json"],
+  "include": ["src/**/*", "src/**/*.json", "test/**/*", "scripts/**/*"],
   "exclude": ["node_modules", "dist"]
 }

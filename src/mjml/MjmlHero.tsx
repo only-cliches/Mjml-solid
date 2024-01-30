@@ -2,7 +2,8 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
@@ -14,8 +15,8 @@ export interface IMjmlHeroProps {
   backgroundUrl?: string;
   backgroundWidth?: string | number;
   backgroundHeight?: string | number;
-  backgroundPosition?: React.CSSProperties["backgroundPosition"];
-  borderRadius?: React.CSSProperties["borderRadius"];
+  backgroundPosition?: CSS.Properties["backgroundPosition"];
+  borderRadius?: CSS.Properties["borderRadius"];
   containerBackgroundColor?: string;
   innerBackgroundColor?: string;
   innerPadding?: string | number;
@@ -29,18 +30,16 @@ export interface IMjmlHeroProps {
   paddingLeft?: string | number;
   paddingRight?: string | number;
   paddingTop?: string | number;
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   verticalAlign?: "top" | "bottom" | "middle";
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlHero({ children, ...props }: IMjmlHeroProps): JSX.Element {
-  return React.createElement(
-    "mj-hero",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-hero {...useProps} children={children} />;
 }

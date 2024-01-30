@@ -2,7 +2,8 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
@@ -18,12 +19,12 @@ export interface IMjmlImageProps {
   /** MJML default value: center */
   align?: "left" | "center" | "right";
   /** MJML default value: 0 */
-  border?: React.CSSProperties["border"];
+  border?: CSS.Properties["border"];
   borderBottom?: string;
   borderLeft?: string;
   borderRight?: string;
   borderTop?: string;
-  borderRadius?: React.CSSProperties["borderRadius"];
+  borderRadius?: CSS.Properties["borderRadius"];
   containerBackgroundColor?: string;
   fluidOnMobile?: boolean;
   /** MJML default value: 10px 25px */
@@ -40,11 +41,13 @@ export interface IMjmlImageProps {
   maxHeight?: string | number;
   fontSize?: string | number;
   usemap?: string;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
 }
 
 export function MjmlImage(props: IMjmlImageProps): JSX.Element {
-  return React.createElement("mj-image", convertPropsToMjmlAttributes(props));
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-image {...useProps} />;
 }

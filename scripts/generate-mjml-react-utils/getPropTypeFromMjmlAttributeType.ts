@@ -35,7 +35,7 @@ export function getPropTypeFromMjmlAttributeType(
   if (ATTRIBUTES_TO_USE_CSSProperties_WITH.has(attribute)) {
     // When possible prefer using the CSSProperties definitions over the
     // less helpful "string" or "string | number" type definitions.
-    return `React.CSSProperties["${attribute}"]`;
+    return `CSS.Properties["${attribute}"]`;
   }
   if (
     mjmlAttributeType.startsWith("unit") &&

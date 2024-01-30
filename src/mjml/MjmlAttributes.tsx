@@ -2,24 +2,22 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlAttributesProps {
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlAttributes({
   children,
   ...props
 }: IMjmlAttributesProps): JSX.Element {
-  return React.createElement(
-    "mj-attributes",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-attributes {...useProps} children={children} />;
 }

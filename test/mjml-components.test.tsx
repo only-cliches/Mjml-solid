@@ -1,6 +1,9 @@
 import { renderToMjml } from "../src/utils/renderToMjml";
 
-import { mockMjmlReactTestData } from "./__mockData__/mockMjmlReactTestData";
+import {
+  minifyHTML,
+  mockMjmlReactTestData,
+} from "./__mockData__/mockMjmlReactTestData";
 
 /**
  * The test cases for this file are defined in mockMjmlReactTestData
@@ -8,7 +11,7 @@ import { mockMjmlReactTestData } from "./__mockData__/mockMjmlReactTestData";
 describe("Mjml Components", () => {
   test.each(Object.entries(mockMjmlReactTestData))("<%s />", (_, testCases) => {
     testCases.forEach(({ mjmlReact, expectedMjml }) => {
-      expect(renderToMjml(mjmlReact)).toBe(expectedMjml);
+      expect(minifyHTML(renderToMjml(mjmlReact))).toBe(expectedMjml);
     });
   });
 });

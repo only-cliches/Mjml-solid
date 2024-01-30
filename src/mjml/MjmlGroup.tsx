@@ -2,29 +2,28 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlGroupProps {
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   /** MJML default value: ltr */
   direction?: "ltr" | "rtl";
   verticalAlign?: "top" | "bottom" | "middle";
   width?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlGroup({
   children,
   ...props
 }: IMjmlGroupProps): JSX.Element {
-  return React.createElement(
-    "mj-group",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-group {...useProps} children={children} />;
 }

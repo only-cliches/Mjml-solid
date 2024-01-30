@@ -2,13 +2,14 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlDividerProps {
-  borderColor?: React.CSSProperties["borderColor"];
-  borderStyle?: React.CSSProperties["borderStyle"];
+  borderColor?: CSS.Properties["borderColor"];
+  borderStyle?: CSS.Properties["borderStyle"];
   borderWidth?: string | number;
   containerBackgroundColor?: string;
   /** MJML default value: 10px 25px */
@@ -21,11 +22,13 @@ export interface IMjmlDividerProps {
   width?: string | number;
   /** MJML default value: center */
   align?: "left" | "center" | "right";
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
 }
 
 export function MjmlDivider(props: IMjmlDividerProps): JSX.Element {
-  return React.createElement("mj-divider", convertPropsToMjmlAttributes(props));
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-divider {...useProps} />;
 }

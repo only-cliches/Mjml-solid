@@ -2,7 +2,8 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
@@ -10,14 +11,14 @@ export interface IMjmlTableProps {
   /** MJML default value: left */
   align?: "left" | "right" | "center";
   /** MJML default value: none */
-  border?: React.CSSProperties["border"];
+  border?: CSS.Properties["border"];
   /** MJML default value: 0 */
   cellpadding?: string;
   /** MJML default value: 0 */
   cellspacing?: string;
   containerBackgroundColor?: string;
   /** MJML default value: #000000 */
-  color?: React.CSSProperties["color"];
+  color?: CSS.Properties["color"];
   fontFamily?: string;
   fontSize?: string | number;
   fontWeight?: string;
@@ -33,20 +34,17 @@ export interface IMjmlTableProps {
   verticalAlign?: "top" | "bottom" | "middle";
   /** MJML default value: 100% */
   width?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlTable({
   children,
   ...props
 }: IMjmlTableProps): JSX.Element {
-  return React.createElement(
-    "mj-table",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-table {...useProps} children={children} />;
 }

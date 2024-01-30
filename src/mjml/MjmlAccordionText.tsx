@@ -2,38 +2,36 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlAccordionTextProps {
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   fontSize?: string | number;
   fontFamily?: string;
   fontWeight?: string;
   letterSpacing?: string | number;
   lineHeight?: string | number;
-  color?: React.CSSProperties["color"];
+  color?: CSS.Properties["color"];
   paddingBottom?: string | number;
   paddingLeft?: string | number;
   paddingRight?: string | number;
   paddingTop?: string | number;
   /** MJML default value: 16px */
   padding?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlAccordionText({
   children,
   ...props
 }: IMjmlAccordionTextProps): JSX.Element {
-  return React.createElement(
-    "mj-accordion-text",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-accordion-text {...useProps} children={children} />;
 }

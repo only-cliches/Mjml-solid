@@ -2,23 +2,21 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlRawProps {
   position?: "file-start";
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  innerHTML?: string;
+  textContent?: string;
 }
 
-export function MjmlRaw({ children, ...props }: IMjmlRawProps): JSX.Element {
-  return React.createElement(
-    "mj-raw",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+export function MjmlRaw(props: IMjmlRawProps): JSX.Element {
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-raw {...useProps} />;
 }

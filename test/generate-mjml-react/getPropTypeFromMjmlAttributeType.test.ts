@@ -77,7 +77,7 @@ describe("getPropTypeFromMjmlAttributeType", () => {
       "mjml attribute $attribute with type $mjmlType becomes a CSSProperty",
       ({ mjmlType, attribute }) => {
         expect(getPropTypeFromMjmlAttributeType(attribute, mjmlType)).toContain(
-          "CSSProperties"
+          "CSS.Properties"
         );
       }
     );
@@ -87,7 +87,7 @@ describe("getPropTypeFromMjmlAttributeType", () => {
     test("CSSProperties preempt 'unit'", () => {
       expect(
         getPropTypeFromMjmlAttributeType(cssAttribute, "unit(px)")
-      ).toContain("CSSProperties");
+      ).toContain("CSS.Properties");
     });
     test("CSSProperties does not preempt 'boolean', 'integer', or 'enum'", () => {
       expect(

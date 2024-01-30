@@ -1,6 +1,16 @@
-import React from "react";
+import { minify as htmlMinify } from "html-minifier";
+import { JSX } from "solid-js";
 
 import * as mjmlComponents from "../../src/mjml";
+
+export const minifyHTML = (html: string) =>
+  htmlMinify(html, {
+    caseSensitive: true,
+    collapseWhitespace: true,
+    minifyCSS: true,
+    removeComments: false,
+    removeEmptyAttributes: true,
+  });
 
 const {
   Mjml,
@@ -45,7 +55,7 @@ const {
 type AllComponents = keyof typeof mjmlComponents;
 
 type MjmlComponentTest = {
-  mjmlReact: React.ReactElement;
+  mjmlReact: JSX.Element;
   expectedMjml: string;
 };
 
@@ -142,7 +152,7 @@ export const mockMjmlReactTestData: MockComponentData = {
   MjmlColumn: [
     {
       mjmlReact: (
-        <MjmlColumn borderRadius={10} width={20}>
+        <MjmlColumn borderRadius={"10px"} width={20}>
           Content
         </MjmlColumn>
       ),
@@ -177,11 +187,7 @@ export const mockMjmlReactTestData: MockComponentData = {
   ],
   MjmlRaw: [
     {
-      mjmlReact: (
-        <MjmlRaw>
-          <h1>Hello World!</h1>
-        </MjmlRaw>
-      ),
+      mjmlReact: <MjmlRaw innerHTML={`<h1>Hello World!</h1>`}></MjmlRaw>,
       expectedMjml: `<mj-raw><h1>Hello World!</h1></mj-raw>`,
     },
   ],
@@ -273,17 +279,15 @@ export const mockMjmlReactTestData: MockComponentData = {
   ],
   MjmlStyle: [
     {
-      mjmlReact: <MjmlStyle>{".button{}"}</MjmlStyle>,
+      mjmlReact: <MjmlStyle innerHTML=".button{}"></MjmlStyle>,
       expectedMjml: `<mj-style>.button{}</mj-style>`,
     },
     {
-      mjmlReact: <MjmlStyle>{"body > div {}"}</MjmlStyle>,
+      mjmlReact: <MjmlStyle innerHTML="body > div {}"></MjmlStyle>,
       expectedMjml: `<mj-style>body > div {}</mj-style>`,
     },
     {
-      mjmlReact: (
-        <MjmlStyle dangerouslySetInnerHTML={{ __html: "body > div {}" }} />
-      ),
+      mjmlReact: <MjmlStyle innerHTML={`body > div {}`}></MjmlStyle>,
       expectedMjml: `<mj-style>body > div {}</mj-style>`,
     },
   ],
@@ -374,7 +378,7 @@ export const mockMjmlReactTestData: MockComponentData = {
   MjmlSelector: [
     {
       mjmlReact: <MjmlSelector path=".custom div"> </MjmlSelector>,
-      expectedMjml: `<mj-selector path=".custom div"> </mj-selector>`,
+      expectedMjml: `<mj-selector path=".custom div"></mj-selector>`,
     },
   ],
   MjmlHtmlAttribute: [

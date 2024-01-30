@@ -2,17 +2,18 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlSocialElementProps {
   /** MJML default value: left */
   align?: "left" | "center" | "right";
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   /** MJML default value: #000 */
-  color?: React.CSSProperties["color"];
-  borderRadius?: React.CSSProperties["borderRadius"];
+  color?: CSS.Properties["color"];
+  borderRadius?: CSS.Properties["borderRadius"];
   fontFamily?: string;
   fontSize?: string | number;
   fontStyle?: string;
@@ -38,22 +39,19 @@ export interface IMjmlSocialElementProps {
   title?: string;
   /** MJML default value: _blank */
   target?: string;
-  textDecoration?: React.CSSProperties["textDecoration"];
+  textDecoration?: CSS.Properties["textDecoration"];
   verticalAlign?: "top" | "middle" | "bottom";
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlSocialElement({
   children,
   ...props
 }: IMjmlSocialElementProps): JSX.Element {
-  return React.createElement(
-    "mj-social-element",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-social-element {...useProps} children={children} />;
 }

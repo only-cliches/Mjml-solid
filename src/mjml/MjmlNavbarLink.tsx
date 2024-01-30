@@ -2,13 +2,14 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlNavbarLinkProps {
   /** MJML default value: #000000 */
-  color?: React.CSSProperties["color"];
+  color?: CSS.Properties["color"];
   fontFamily?: string;
   fontSize?: string | number;
   fontStyle?: string;
@@ -26,22 +27,19 @@ export interface IMjmlNavbarLinkProps {
   paddingTop?: string | number;
   /** MJML default value: 15px 10px */
   padding?: string | number;
-  textDecoration?: React.CSSProperties["textDecoration"];
-  textTransform?: React.CSSProperties["textTransform"];
-  className?: string;
+  textDecoration?: CSS.Properties["textDecoration"];
+  textTransform?: CSS.Properties["textTransform"];
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlNavbarLink({
   children,
   ...props
 }: IMjmlNavbarLinkProps): JSX.Element {
-  return React.createElement(
-    "mj-navbar-link",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-navbar-link {...useProps} children={children} />;
 }

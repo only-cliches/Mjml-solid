@@ -1,29 +1,34 @@
 import kebabCase from "lodash.kebabcase";
 
-const DANGEROUSLY_SET_INNER_HTML = "dangerouslySetInnerHTML";
+// const DANGEROUSLY_SET_INNER_HTML = "dangerouslySetInnerHTML";
 
 export function convertPropsToMjmlAttributes<P>(props: {
   [K in keyof P]: unknown;
 }) {
   const mjmlProps = Object.entries(props).reduce((mjmlProps, [prop, value]) => {
     const mjmlProp =
-      prop === DANGEROUSLY_SET_INNER_HTML ? prop : kebabCase(prop);
-    const mjmlValue = convertPropValueToMjml(mjmlProp, value);
+      ["innerHTML", "textContent"].indexOf(prop) !== -1
+        ? prop
+        : kebabCase(prop);
+    const mjmlValue =
+      ["innerHTML", "textContent"].indexOf(prop) !== -1
+        ? value
+        : convertPropValueToMjml(mjmlProp, value);
 
     if (mjmlValue === undefined || prop === "className") {
       return mjmlProps;
     }
     if (prop === "mjmlClass") {
-      mjmlProps["mj-class"] = mjmlValue;
+      mjmlProps["mj-class"] = mjmlValue as any;
     } else {
-      mjmlProps[mjmlProp] = mjmlValue;
+      mjmlProps[mjmlProp] = mjmlValue as any;
     }
     return mjmlProps;
   }, {} as Record<string, string | object>);
 
   // className is a special prop used extensively in react in place of the html class attribute.
   // mjml uses a different name (css-class) for the same thing.
-  const className = (props as any).className;
+  const className = (props as any).class;
   if (typeof className === "string") {
     mjmlProps["css-class"] =
       typeof mjmlProps["css-class"] === "string"

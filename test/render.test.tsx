@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Mjml, MjmlHead, MjmlTitle, MjmlBody, MjmlRaw } from "../src";
 import { render } from "../src/utils/render";
 
@@ -11,9 +9,7 @@ describe("render()", () => {
           <MjmlTitle>Title</MjmlTitle>
         </MjmlHead>
         <MjmlBody>
-          <MjmlRaw>
-            <p>Paragraph</p>
-          </MjmlRaw>
+          <MjmlRaw innerHTML="<p>Paragraph</p>"></MjmlRaw>
         </MjmlBody>
       </Mjml>
     );

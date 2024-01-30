@@ -2,23 +2,24 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlButtonProps {
   /** MJML default value: center */
   align?: "left" | "center" | "right";
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   borderBottom?: string;
   borderLeft?: string;
-  borderRadius?: React.CSSProperties["borderRadius"];
+  borderRadius?: CSS.Properties["borderRadius"];
   borderRight?: string;
   borderTop?: string;
   /** MJML default value: none */
-  border?: React.CSSProperties["border"];
+  border?: CSS.Properties["border"];
   /** MJML default value: #ffffff */
-  color?: React.CSSProperties["color"];
+  color?: CSS.Properties["color"];
   containerBackgroundColor?: string;
   fontFamily?: string;
   fontSize?: string | number;
@@ -40,25 +41,22 @@ export interface IMjmlButtonProps {
   rel?: string;
   /** MJML default value: _blank */
   target?: string;
-  textDecoration?: React.CSSProperties["textDecoration"];
-  textTransform?: React.CSSProperties["textTransform"];
+  textDecoration?: CSS.Properties["textDecoration"];
+  textTransform?: CSS.Properties["textTransform"];
   verticalAlign?: "top" | "bottom" | "middle";
   textAlign?: "left" | "right" | "center";
   width?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlButton({
   children,
   ...props
 }: IMjmlButtonProps): JSX.Element {
-  return React.createElement(
-    "mj-button",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-button {...useProps} children={children} />;
 }

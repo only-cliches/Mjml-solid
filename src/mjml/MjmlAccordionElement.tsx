@@ -2,13 +2,14 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlAccordionElementProps {
-  backgroundColor?: React.CSSProperties["backgroundColor"];
-  border?: React.CSSProperties["border"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
+  border?: CSS.Properties["border"];
   fontFamily?: string;
   iconAlign?: "top" | "middle" | "bottom";
   iconWidth?: string | number;
@@ -18,19 +19,17 @@ export interface IMjmlAccordionElementProps {
   iconUnwrappedUrl?: string;
   iconUnwrappedAlt?: string;
   iconPosition?: "left" | "right";
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlAccordionElement({
   children,
   ...props
 }: IMjmlAccordionElementProps): JSX.Element {
-  return React.createElement(
-    "mj-accordion-element",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-accordion-element {...useProps} children={children} />;
 }

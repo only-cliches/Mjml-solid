@@ -2,22 +2,23 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlWrapperProps {
-  backgroundColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: CSS.Properties["backgroundColor"];
   backgroundUrl?: string;
   backgroundRepeat?: "repeat" | "no-repeat";
-  backgroundSize?: React.CSSProperties["backgroundSize"];
-  backgroundPosition?: React.CSSProperties["backgroundPosition"];
+  backgroundSize?: CSS.Properties["backgroundSize"];
+  backgroundPosition?: CSS.Properties["backgroundPosition"];
   backgroundPositionX?: string;
   backgroundPositionY?: string;
-  border?: React.CSSProperties["border"];
+  border?: CSS.Properties["border"];
   borderBottom?: string;
   borderLeft?: string;
-  borderRadius?: React.CSSProperties["borderRadius"];
+  borderRadius?: CSS.Properties["borderRadius"];
   borderRight?: string;
   borderTop?: string;
   /** MJML default value: ltr */
@@ -31,19 +32,17 @@ export interface IMjmlWrapperProps {
   paddingRight?: string | number;
   textAlign?: "left" | "center" | "right";
   textPadding?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlWrapper({
   children,
   ...props
 }: IMjmlWrapperProps): JSX.Element {
-  return React.createElement(
-    "mj-wrapper",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-wrapper {...useProps} children={children} />;
 }

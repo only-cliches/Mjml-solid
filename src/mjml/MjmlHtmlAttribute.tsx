@@ -2,12 +2,12 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlHtmlAttributeProps {
-  children?: React.ReactNode;
+  children?: JSX.Element;
   name?: string;
 }
 
@@ -15,9 +15,7 @@ export function MjmlHtmlAttribute({
   children,
   ...props
 }: IMjmlHtmlAttributeProps): JSX.Element {
-  return React.createElement(
-    "mj-html-attribute",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-html-attribute {...useProps} children={children} />;
 }

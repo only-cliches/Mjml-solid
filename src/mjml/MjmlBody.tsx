@@ -2,24 +2,23 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
 export interface IMjmlBodyProps {
   /** MJML default value: 600px */
   width?: string | number;
-  backgroundColor?: React.CSSProperties["backgroundColor"];
-  className?: string;
+  backgroundColor?: CSS.Properties["backgroundColor"];
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 export function MjmlBody({ children, ...props }: IMjmlBodyProps): JSX.Element {
-  return React.createElement(
-    "mj-body",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-body {...useProps} children={children} />;
 }

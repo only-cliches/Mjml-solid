@@ -2,7 +2,8 @@
  * This file is generated. Don't edit it directly.
  * Modify `scripts/generate-mjml-react.ts` to make changes to these files
  */
-import React from "react";
+import type * as CSS from "csstype";
+import { JSX } from "solid-js";
 
 import { convertPropsToMjmlAttributes } from "../utils";
 
@@ -15,23 +16,20 @@ export interface IMjmlCarouselImageProps {
   title?: string;
   src?: string;
   thumbnailsSrc?: string;
-  borderRadius?: React.CSSProperties["borderRadius"];
+  borderRadius?: CSS.Properties["borderRadius"];
   tbBorder?: string;
   tbBorderRadius?: string | number;
-  className?: string;
+  class?: string;
   cssClass?: string;
   mjmlClass?: string;
-  children?: React.ReactNode;
-  dangerouslySetInnerHTML?: { __html: string };
+  children?: JSX.Element;
 }
 
 export function MjmlCarouselImage({
   children,
   ...props
 }: IMjmlCarouselImageProps): JSX.Element {
-  return React.createElement(
-    "mj-carousel-image",
-    convertPropsToMjmlAttributes(props),
-    children
-  );
+  const useProps = convertPropsToMjmlAttributes(props);
+
+  return <mj-carousel-image {...useProps} children={children} />;
 }
