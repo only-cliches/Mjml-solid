@@ -1,31 +1,16 @@
-# mjml-react &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/faire/mjml-react/blob/master/LICENSE) <a href="https://www.npmjs.com/package/mjml-react"><img src="https://img.shields.io/npm/v/@faire/mjml-react" alt="npm version"></a> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/faire/mjml-react/pulls)
+Fork of [mjml-react](https://www.npmjs.com/package/mjml-solid) for [solid-js](https://www.npmjs.com/package/solid-js)
+
+# mjml-solid &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/only-cliches/Mjml-solid/blob/master/LICENSE) <a href="https://www.npmjs.com/package/mjml-solid"><img src="https://img.shields.io/npm/v/mjml-solid" alt="npm version"></a> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/only-cliches/Mjml-solid/)
 
 <img src="https://cdn.worldvectorlogo.com/logos/mjml-by-mailjet.svg" height="64"/> &middot; <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" width="64" height="64"/>
 
 There is an awesome library [mjml](https://mjml.io/) with github repo here [https://github.com/mjmlio/mjml](https://github.com/mjmlio/mjml).
 
 `MJML` is a markup language created by [Mailjet](https://www.mailjet.com/).
-So in order to create emails on the fly we created a library with `React` components.
+So in order to create emails on the fly we created a library with `Solid` components.
 
-## Get started today with V2 - 100% backwards compatible with https://github.com/wix-incubator/mjml-react/
-
-V2 is a drop in replacement for https://github.com/wix-incubator/mjml-react/, with some additional support. If there's a component missing you can make a PR against https://github.com/Faire/mjml-react/tree/main-v2 or submit an issue and we'll try to unblock you.
-
-## What's new in V3?
-
-We wanted V3 of mjml-react to be fairly easy to migrate to from V2. We will implement more advanced features in V4. The main updates in V3 include:
-
-- Typescript: mjml-react is now written in typescript which helps ensure correct props are passed to mjml components
-- Full mjml component support: We use an automated script for pulling mjml components and creating a corresponding mjml-react component. This means we get full support of all components available in the latest mjml version
-- Other small changes: add dangerouslySetInnerHTML in mjml-react for mjml ending tags, update testing, add in-code documenation
-
-## What's coming in V4?
-
-In V4 we are exploring exciting features that will make mjml-react even more powerful. This includes:
-
-- Improved prop type safety: help ensure correct formatting for props like padding, width, and height
-
-If you want to be on the cutting edge of what is being released, we are publishing a [v4-main-alpha version](https://www.npmjs.com/package/@faire/mjml-react/v/main-alpha) to npm.
+> This library depends on Solid's `renderToString` method, which is only availble in NodeJS.
+> It might be possible to run this library in the browser, but it's not supported.
 
 ## Getting Started
 
@@ -34,25 +19,18 @@ If you want to be on the cutting edge of what is being released, we are publishi
 node:
 
 ```bash
-npm install @faire/mjml-react mjml react react-dom
+npm install mjml-solid mjml solid-js
 ```
 
-browser:
-
-```bash
-npm install @faire/mjml-react mjml-browser react react-dom
-```
-
-2. Wire up your render function (uncomment `mjml` or `mjml-browser`)
+1. Wire up your render function
 
 ```tsx
-import { renderToMjml } from "@faire/mjml-react/utils/renderToMjml";
-// import mjml2html from "mjml";
-// import mjml2html from "mjml-browser";
+import { renderToMjml, renderToMjmlAsync } from "mjml-solid/utils/renderToMjml";
+import mjml2html from "mjml";
 import { MJMLParseResults } from "mjml-core";
-import React from "react";
+import { JSX } from "solid-js";
 
-export function renderReactToMjml(email: React.ReactElement): MJMLParseResults {
+export function renderSolidEmail(email: JSX.Element): MJMLParseResults {
   return mjml2html(renderToMjml(email));
 }
 ```
@@ -70,11 +48,11 @@ import {
   MjmlColumn,
   MjmlButton,
   MjmlImage,
-} from "@faire/mjml-react";
+} from "mjml-solid";
 
-import { renderReactToMjml } from "./renderReactToMjml";
+import { renderSolidEmail } from "./renderSolidEmail";
 
-const { html, errors } = renderReactToMjml(
+const { html, errors } = renderSolidEmail(
   <Mjml>
     <MjmlHead>
       <MjmlTitle>Last Minute Offer</MjmlTitle>
@@ -109,7 +87,7 @@ And as the result you will get a nice looking email HTML (works in mobile too!)
 
 ## Options
 
-@faire/mjml-react sets the following MJML options when rendering to HTML:
+mjml-solid sets the following MJML options when rendering to HTML:
 
 ```js
 {
@@ -129,19 +107,19 @@ import {
   MjmlHtml,
   MjmlComment,
   MjmlConditionalComment
-} from '@faire/mjml-react/extensions';
+} from 'mjml-solid/extensions';
 
-<MjmlComment>Built with ... at ...</MjmlComment>
+<MjmlComment comment="Built with ... at ..." />
 // <!--Built with ... at ...-->
 
-<MjmlConditionalComment>MSO conditionals</MjmlConditionalComment>
+<MjmlConditionalComment comment="MSO conditionals" />
 // <!--[if gte mso 9]>MSO conditionals<![endif]-->
 
-<MjmlConditionalComment condition="if IE">MSO conditionals</MjmlConditionalComment>
+<MjmlConditionalComment comment="MSO conditionals" condition="if IE" />
 // <!--[if IE]>MSO conditionals<![endif]-->
 
-<MjmlHtml tag="div" html="<span>Hello World!</span>" />
-// <div><span>Hello World!</span></div>
+<MjmlHtml html="<span>Hello World!</span>" />
+// <span>Hello World!</span>
 ```
 
 ## Utils
@@ -154,7 +132,7 @@ So we need to replace them to hex.
 import {
   namedEntityToHexCode,
   fixConditionalComment,
-} from "@faire/mjml-react/utils";
+} from "mjml-solid/utils";
 
 const html = "<div>&apos;</div>";
 namedEntityToHexCode(html);
@@ -170,9 +148,4 @@ fixConditionalComment(
 
 ## Limitations
 
-Currently `mjml` and `@faire/mjml-react` libraries are meant to be run inside a node.
-
-## Example project
-
-You can find an example project here
-[https://github.com/wix-incubator/mjml-react-example](https://github.com/wix-incubator/mjml-react-example)
+Currently `mjml` and `mjml-solid` libraries are meant to be run inside a node.

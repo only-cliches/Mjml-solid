@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig-base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "esnext",
+    "outDir": "dist/esm"
+  },
+  "include": ["src/ambient.d.ts"],
+  "files": ["src/index.ts"]
+}
