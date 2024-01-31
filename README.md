@@ -1,8 +1,8 @@
-Fork of [mjml-react](https://www.npmjs.com/package/mjml-solid) for [solid-js](https://www.npmjs.com/package/solid-js)
+Fork of [mjml-react](https://www.npmjs.com/package/@faire/mjml-react) for [solid-js](https://www.npmjs.com/package/solid-js)
 
 # mjml-solid &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/only-cliches/Mjml-solid/blob/master/LICENSE) <a href="https://www.npmjs.com/package/mjml-solid"><img src="https://img.shields.io/npm/v/mjml-solid" alt="npm version"></a> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/only-cliches/Mjml-solid/)
 
-<img src="https://cdn.worldvectorlogo.com/logos/mjml-by-mailjet.svg" height="64"/> &middot; <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" width="64" height="64"/>
+<img src="https://cdn.worldvectorlogo.com/logos/mjml-by-mailjet.svg" height="64"/>
 
 There is an awesome library [mjml](https://mjml.io/) with github repo here [https://github.com/mjmlio/mjml](https://github.com/mjmlio/mjml).
 
@@ -13,10 +13,6 @@ So in order to create emails on the fly we created a library with `Solid` compon
 > It might be possible to run this library in the browser, but it's not supported.
 
 ## Getting Started
-
-1. Choose between rendering in mjml or mjml-browser based on your rendering environment. Also includes additional required dependencies.
-
-node:
 
 ```bash
 npm install mjml-solid mjml solid-js
@@ -30,12 +26,19 @@ import mjml2html from "mjml";
 import { MJMLParseResults } from "mjml-core";
 import { JSX } from "solid-js";
 
+// sync
 export function renderSolidEmail(email: JSX.Element): MJMLParseResults {
   return mjml2html(renderToMjml(email));
 }
+
+// async
+export async function renderSolidEmailAsync(email: JSX.Element): Promise<MJMLParseResults> {
+  const  mjmlSrc = await renderToMjmlAsync(email);
+  return mjml2html(mjmlSrc);
+}
 ```
 
-3. And afterwards write a code like a pro:
+2. And afterwards write a code like a pro:
 
 ```tsx
 import {
