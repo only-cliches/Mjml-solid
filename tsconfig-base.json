@@ -24,6 +24,6 @@
     "resolveJsonModule": true
   },
 
-  "include": ["src/**/*", "src/**/*.json", "test/**/*", "scripts/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "test/**/*", "scripts/**/*"],
+  "exclude": ["node_modules/**/*", "dist/**/*"]
 }

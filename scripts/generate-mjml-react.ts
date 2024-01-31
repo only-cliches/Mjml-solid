@@ -134,11 +134,7 @@ function buildTypesForComponent(mjmlComponent: IMjmlComponent): string {
   if (HAS_CHILDREN.has(componentName)) {
     typesFromMjmlAttributes["children"] = "JSX.Element";
   }
-  if (componentName == "mj-raw") {
-    typesFromMjmlAttributes["innerHTML"] = "string";
-    typesFromMjmlAttributes["textContent"] = "string";
-  }
-  if (componentName == "mj-style") {
+  if (componentName == "mj-raw" || componentName == "mj-style") {
     typesFromMjmlAttributes["innerHTML"] = "string";
     typesFromMjmlAttributes["textContent"] = "string";
   }

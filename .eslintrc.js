@@ -12,8 +12,8 @@ module.exports = {
   },
   plugins: [
     "@typescript-eslint",
-    "react",
-    "react-hooks",
+    // "react",
+    // "react-hooks",
     "import",
     /* testing plugins */
     "jest",
@@ -24,8 +24,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
+    // "plugin:react/recommended",
+    // "plugin:react-hooks/recommended",
   ],
   settings: {
     react: {
@@ -91,19 +91,19 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
 
     /* react rules */
-    "react/display-name": "off",
-    "react/jsx-curly-brace-presence": ["error", { props: "never" }],
-    "react/no-deprecated": "warn",
-    "react/no-unescaped-entities": ["error", { forbid: [">", "}"] }],
-    "react/prop-types": "off",
-    "react/no-danger": "error",
-    "react/self-closing-comp": "error",
-    "react/function-component-definition": [
-      "error",
-      {
-        namedComponents: "arrow-function",
-      },
-    ],
+    // "react/display-name": "off",
+    // "react/jsx-curly-brace-presence": ["error", { props: "never" }],
+    // "react/no-deprecated": "warn",
+    // "react/no-unescaped-entities": ["error", { forbid: [">", "}"] }],
+    // "react/prop-types": "off",
+    // "react/no-danger": "error",
+    // "react/self-closing-comp": "error",
+    // "react/function-component-definition": [
+    //   "error",
+    //   {
+    //     namedComponents: "arrow-function",
+    //   },
+    // ],
 
     /* import rules */
     "import/no-unassigned-import": "error",
@@ -142,13 +142,13 @@ module.exports = {
         "react/jsx-curly-brace-presence": "off",
       },
     },
-    {
-      files: ["**/?(*.)+(test).tsx"],
-      extends: ["plugin:testing-library/react", "plugin:jest-dom/recommended"],
-      rules: {
-        "testing-library/prefer-user-event": "error",
-      },
-    },
+    // {
+    //   files: ["**/?(*.)+(test).tsx"],
+    //   extends: ["plugin:testing-library/react", "plugin:jest-dom/recommended"],
+    //   rules: {
+    //     "testing-library/prefer-user-event": "error",
+    //   },
+    // },
     {
       files: ["src/mjml/*"],
       rules: {

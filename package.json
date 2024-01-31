@@ -27,14 +27,14 @@
     "access": "public"
   },
   "scripts": {
-    "build-dist": "/bin/rm -rf dist && yarn build-cjs && yarn build-esm",
+    "build-dist": "/bin/rm -rf dist && npm run build-cjs && npm run build-esm",
     "build-cjs": "tsc -p tsconfig.json",
     "build-esm": "tsc -p tsconfig-esm.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest",
     "test-dist-skip-build": "jest --config=jest-dist.config.js",
-    "test-dist": "yarn build-dist && yarn test-dist-skip-build",
+    "test-dist": "npm run build-dist && npm run test-dist-skip-build",
     "generate-mjml-react": "ts-node scripts/generate-mjml-react.ts",
     "build-mjml-react": "ts-node scripts/build-mjml-react.ts",
     "prepare": "husky install"
@@ -71,7 +71,7 @@
     "semantic-release": "^19.0.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.3.0",
-    "typescript": "4.5.5"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "mjml": "^4.13.0"

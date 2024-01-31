@@ -5,5 +5,7 @@
     "target": "es2015",
     "outDir": "dist",
     "declaration": true
-  }
+  },
+  "include": ["src/ambient.d.ts"],
+  "files": ["src/index.ts"]
 }

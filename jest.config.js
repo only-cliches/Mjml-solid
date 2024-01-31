@@ -6,6 +6,7 @@ module.exports = {
     "solid-js/web": "<rootDir>/node_modules/solid-js/web/dist/server.cjs",
     "solid-js": "<rootDir>/node_modules/solid-js/dist/server.cjs",
   },
+  roots: ["test"],
   globals: {
     "ts-jest": {
       tsconfig: "tsconfig.json",
