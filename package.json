@@ -1,6 +1,6 @@
 {
   "name": "mjml-solid",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "license": "MIT",
   "description": "SolidJS component library to generate the HTML emails on the fly",
   "keywords": [
@@ -44,10 +44,9 @@
     "format": "prettier --write .",
     "test": "jest",
     "test-dist-skip-build": "jest --config=jest-dist.config.js",
-    "test-dist": "npm run build-dist && npm run test-dist-skip-build",
+    "test-dist": "npm run build && npm run test-dist-skip-build",
     "generate-mjml-react": "ts-node scripts/generate-mjml-react.ts",
-    "build-mjml-react": "ts-node scripts/build-mjml-react.ts",
-    "prepare": "husky install"
+    "build-mjml-react": "ts-node scripts/build-mjml-react.ts"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.9",
@@ -91,6 +90,6 @@
   "dependencies": {
     "csstype": "^3.1.3",
     "lodash.kebabcase": "^4.1.1",
-    "solid-js": "^1.8.12"
+    "solid-js": "^1.9.11"
   }
 }
