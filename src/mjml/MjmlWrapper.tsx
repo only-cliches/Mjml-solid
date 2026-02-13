@@ -32,6 +32,7 @@ export interface IMjmlWrapperProps {
   paddingRight?: string | number;
   textAlign?: "left" | "center" | "right";
   textPadding?: string | number;
+  gap?: string | number;
   class?: string;
   cssClass?: string;
   mjmlClass?: string;

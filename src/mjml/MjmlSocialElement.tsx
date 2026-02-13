@@ -10,6 +10,7 @@ import { convertPropsToMjmlAttributes } from "../utils";
 export interface IMjmlSocialElementProps {
   /** MJML default value: left */
   align?: "left" | "center" | "right";
+  iconPosition?: "left" | "right";
   backgroundColor?: CSS.Properties["backgroundColor"];
   /** MJML default value: #000 */
   color?: CSS.Properties["color"];

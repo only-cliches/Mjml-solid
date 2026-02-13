@@ -1,7 +1,5 @@
 import { JSX, Show } from "solid-js";
 
-import { MjmlComment } from "./mjml-comment";
-
 interface IMjmlConditionalComment {
   condition?: string;
   comment?: string;
@@ -28,7 +26,9 @@ export function MjmlConditionalComment(
 
   return (
     <Show when={comment && comment.toString().trim().length}>
-      <MjmlComment comment={`[${condition}]>${comment}<![endif]`}></MjmlComment>
+      <mj-raw
+        textContent={`<!--[${condition}]>${comment}<![endif]-->`}
+      ></mj-raw>
     </Show>
   );
 }

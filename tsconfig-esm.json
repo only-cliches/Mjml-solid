@@ -3,7 +3,8 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "esnext",
-    "outDir": "dist/esm"
+    "outDir": "dist",
+    "declaration": true
   },
   "include": ["src/**/*", "src/**/*.json"]
 }

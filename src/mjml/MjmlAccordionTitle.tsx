@@ -12,6 +12,7 @@ export interface IMjmlAccordionTitleProps {
   color?: CSS.Properties["color"];
   fontSize?: string | number;
   fontFamily?: string;
+  fontWeight?: string;
   paddingBottom?: string | number;
   paddingLeft?: string | number;
   paddingRight?: string | number;

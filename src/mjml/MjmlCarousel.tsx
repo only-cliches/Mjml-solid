@@ -21,7 +21,7 @@ export interface IMjmlCarouselProps {
   paddingRight?: string | number;
   rightIcon?: string;
   /** MJML default value: visible */
-  thumbnails?: "visible" | "hidden";
+  thumbnails?: "visible" | "hidden" | "supported";
   tbBorder?: string;
   tbBorderRadius?: string | number;
   tbHoverBorderColor?: string;

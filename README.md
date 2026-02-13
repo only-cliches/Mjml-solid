@@ -21,9 +21,9 @@ npm install mjml-solid mjml solid-js
 1. Wire up your render function
 
 ```tsx
-import { renderToMjml, renderToMjmlAsync } from "mjml-solid/utils/renderToMjml";
 import mjml2html from "mjml";
 import { MJMLParseResults } from "mjml-core";
+import { renderToMjml, renderToMjmlAsync } from "mjml-solid/utils/renderToMjml";
 import { JSX } from "solid-js";
 
 // sync
@@ -32,8 +32,10 @@ export function renderSolidEmail(email: JSX.Element): MJMLParseResults {
 }
 
 // async
-export async function renderSolidEmailAsync(email: JSX.Element): Promise<MJMLParseResults> {
-  const  mjmlSrc = await renderToMjmlAsync(email);
+export async function renderSolidEmailAsync(
+  email: JSX.Element
+): Promise<MJMLParseResults> {
+  const mjmlSrc = await renderToMjmlAsync(email);
   return mjml2html(mjmlSrc);
 }
 ```
@@ -132,10 +134,7 @@ Because not all mail clients do support named HTML entities, like `&apos;`.
 So we need to replace them to hex.
 
 ```js
-import {
-  namedEntityToHexCode,
-  fixConditionalComment,
-} from "mjml-solid/utils";
+import { namedEntityToHexCode, fixConditionalComment } from "mjml-solid/utils";
 
 const html = "<div>&apos;</div>";
 namedEntityToHexCode(html);
