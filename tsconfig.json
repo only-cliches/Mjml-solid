@@ -4,6 +4,9 @@
     "module": "CommonJS",
     "target": "es2015",
     "outDir": "dist",
-    "declaration": true
-  }
+    "declaration": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": ["./**/*"]
 }
