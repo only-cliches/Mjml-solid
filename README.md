@@ -16,6 +16,8 @@ So in order to create emails on the fly we created a library with `Solid` compon
 
 ```bash
 npm install mjml-solid mjml solid-js
+# optional types
+npm install @types/mjml
 ```
 
 1. Wire up your render function
@@ -23,21 +25,20 @@ npm install mjml-solid mjml solid-js
 ```tsx
 import mjml2html from "mjml";
 import { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
-import { renderToMjml, renderToMjmlAsync } from "mjml-sold/utils/renderToMjml";
+import { renderToMjml, renderToMjmlAsync } from "mjml-solid/dist/utils/renderToMjml";
 import { JSX } from "solid-js";
 
 // sync
-export function renderSolidEmail(email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults {
+export const renderSolidEmail = (email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults => {
     return mjml2html(renderToMjml(email), options);
 }
 
 // async
-export async function renderSolidEmailAsync(
-    email: JSX.Element
-): Promise<MJMLParseResults> {
+export const renderSolidEmailAsync = async (email: JSX.Element, options?: MJMLParsingOptions ): Promise<MJMLParseResults> => {
     const mjmlSrc = await renderToMjmlAsync(email);
-    return mjml2html(mjmlSrc);
+    return mjml2html(mjmlSrc, options);
 }
+
 ```
 
 2. And afterwards write a code like a pro:
@@ -113,7 +114,7 @@ import {
   MjmlHtml,
   MjmlComment,
   MjmlConditionalComment
-} from 'mjml-solid/extensions';
+} from 'mjml-solid/dist/extensions';
 
 <MjmlComment comment="Built with ... at ..." />
 // <!--Built with ... at ...-->
@@ -135,7 +136,7 @@ Because not all mail clients do support named HTML entities, like `&apos;`.
 So we need to replace them to hex.
 
 ```js
-import { namedEntityToHexCode, fixConditionalComment } from "mjml-solid/utils";
+import { namedEntityToHexCode, fixConditionalComment } from "mjml-solid/dist/utils";
 
 const html = "<div>&apos;</div>";
 namedEntityToHexCode(html);
@@ -151,4 +152,4 @@ fixConditionalComment(
 
 ## Limitations
 
-Currently `mjml` and `mjml-solid` libraries are meant to be run inside a node.
+Currently `mjml` and `mjml-solid` libraries are meant to be run inside of node.

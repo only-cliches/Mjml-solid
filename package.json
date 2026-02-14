@@ -1,6 +1,6 @@
 {
   "name": "mjml-solid",
-  "version": "1.2.3",
+  "version": "1.2.6",
   "license": "MIT",
   "description": "SolidJS component library to generate the HTML emails on the fly",
   "keywords": [

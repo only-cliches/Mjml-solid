@@ -4,16 +4,14 @@ import { renderToMjml, renderToMjmlAsync } from "./dist/utils/renderToMjml";
 import { JSX } from "solid-js";
 
 // sync
-export function renderSolidEmail(email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults {
+export const renderSolidEmail = (email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults => {
     return mjml2html(renderToMjml(email), options);
 }
 
 // async
-export async function renderSolidEmailAsync(
-    email: JSX.Element
-): Promise<MJMLParseResults> {
+export const renderSolidEmailAsync = async (email: JSX.Element, options?: MJMLParsingOptions ): Promise<MJMLParseResults> => {
     const mjmlSrc = await renderToMjmlAsync(email);
-    return mjml2html(mjmlSrc);
+    return mjml2html(mjmlSrc, options);
 }
 
 import {
@@ -28,7 +26,7 @@ import {
     MjmlImage,
 } from "./dist";
 
-const { html, errors } = renderSolidEmail(
+const { html, json, errors } = renderSolidEmail(
     <Mjml>
         <MjmlHead>
             <MjmlTitle>Last Minute Offer</MjmlTitle>
