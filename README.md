@@ -1,5 +1,3 @@
-Fork of [mjml-react](https://www.npmjs.com/package/@faire/mjml-react) for [solid-js](https://www.npmjs.com/package/solid-js)
-
 # mjml-solid &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/only-cliches/Mjml-solid/blob/master/LICENSE) <a href="https://www.npmjs.com/package/mjml-solid"><img src="https://img.shields.io/npm/v/mjml-solid" alt="npm version"></a> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/only-cliches/Mjml-solid/)
 
 <img src="https://cdn.worldvectorlogo.com/logos/mjml-by-mailjet.svg" height="64"/>
@@ -16,8 +14,6 @@ So in order to create emails on the fly we created a library with `Solid` compon
 
 ```bash
 npm install mjml-solid mjml solid-js
-# optional types
-npm install @types/mjml
 ```
 
 1. Wire up your render function
@@ -25,7 +21,7 @@ npm install @types/mjml
 ```tsx
 import mjml2html from "mjml";
 import { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
-import { renderToMjml, renderToMjmlAsync } from "mjml-solid/dist/utils/renderToMjml";
+import { renderToMjml, renderToMjmlAsync } from "mjml-solid";
 import { JSX } from "solid-js";
 
 // sync
@@ -114,7 +110,7 @@ import {
   MjmlHtml,
   MjmlComment,
   MjmlConditionalComment
-} from 'mjml-solid/dist/extensions';
+} from "mjml-solid";
 
 <MjmlComment comment="Built with ... at ..." />
 // <!--Built with ... at ...-->
@@ -136,18 +132,11 @@ Because not all mail clients do support named HTML entities, like `&apos;`.
 So we need to replace them to hex.
 
 ```js
-import { namedEntityToHexCode, fixConditionalComment } from "mjml-solid/dist/utils";
+import { namedEntityToHexCode } from "mjml-solid";
 
 const html = "<div>&apos;</div>";
 namedEntityToHexCode(html);
 // <div>&#39;</div>
-
-fixConditionalComment(
-  "<!--[if mso]><div>Hello World</div><![endif]-->",
-  "Hello",
-  "if IE"
-);
-// <!--[if IE]><div>Hello World</div><![endif]-->
 ```
 
 ## Limitations

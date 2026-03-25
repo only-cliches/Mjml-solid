@@ -1,4 +1,4 @@
-import { renderToMjml } from "../src/utils/renderToMjml";
+import { renderToMjml } from "mjml-solid";
 
 import {
   minifyHTML,

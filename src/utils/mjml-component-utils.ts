@@ -1,6 +1,10 @@
-import kebabCase from "lodash.kebabcase";
-
-// const DANGEROUSLY_SET_INNER_HTML = "dangerouslySetInnerHTML";
+function kebabCase(input: string): string {
+  return input
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+    .replace(/_/g, "-")
+    .toLowerCase();
+}
 
 export function convertPropsToMjmlAttributes<P>(props: {
   [K in keyof P]: unknown;
@@ -15,7 +19,7 @@ export function convertPropsToMjmlAttributes<P>(props: {
         ? value
         : convertPropValueToMjml(mjmlProp, value);
 
-    if (mjmlValue === undefined || prop === "className") {
+    if (mjmlValue === undefined || prop === "class" || prop === "className") {
       return mjmlProps;
     }
     if (prop === "mjmlClass") {
@@ -28,7 +32,7 @@ export function convertPropsToMjmlAttributes<P>(props: {
 
   // className is a special prop used extensively in react in place of the html class attribute.
   // mjml uses a different name (css-class) for the same thing.
-  const className = (props as any).class;
+  const className = (props as any).class ?? (props as any).className;
   if (typeof className === "string") {
     mjmlProps["css-class"] =
       typeof mjmlProps["css-class"] === "string"

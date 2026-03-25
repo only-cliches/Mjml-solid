@@ -20,9 +20,7 @@ import { JSX, Show } from "solid-js";
 export function MjmlComment(props: { comment?: string }): JSX.Element {
   return (
     <Show when={props.comment && props.comment.toString().trim().length}>
-      <mj-raw
-        textContent={`<!--${props && props.comment ? props.comment : ""}-->`}
-      ></mj-raw>
+      <mj-raw innerHTML={`<!--${props.comment ?? ""}-->`} />
     </Show>
   );
 }

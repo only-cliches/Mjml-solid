@@ -1,5 +1,5 @@
-import * as mjmlComponents from "../src/mjml";
-import { renderToMjml } from "../src/utils/renderToMjml";
+import * as mjmlComponents from "mjml-solid";
+import { renderToMjml } from "mjml-solid";
 
 import { minifyHTML } from "./__mockData__/mockMjmlReactTestData";
 
@@ -40,6 +40,22 @@ describe("mjml components prop values", () => {
     ).toBe(`<mj-section full-width="full-width"></mj-section>`);
     expect(minifyHTML(renderToMjml(<mjmlComponents.MjmlStyle inline />))).toBe(
       `<mj-style inline="inline"></mj-style>`
+    );
+  });
+
+  it("merges cssClass and class into css-class and maps mjmlClass", () => {
+    expect(
+      minifyHTML(
+        renderToMjml(
+          <mjmlComponents.MjmlSection
+            class="from-class"
+            cssClass="from-css"
+            mjmlClass="from-mjml"
+          />
+        )
+      )
+    ).toBe(
+      '<mj-section css-class="from-css from-class" mj-class="from-mjml"></mj-section>'
     );
   });
 

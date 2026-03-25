@@ -1,8 +1,3 @@
-/*
- * This file is generated. Don't edit it directly.
- * Modify `scripts/generate-mjml-react.ts` to make changes to these files
- */
-
 export { Mjml } from "./Mjml";
 export type { IMjmlProps } from "./Mjml";
 export { MjmlAll } from "./MjmlAll";

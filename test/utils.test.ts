@@ -1,4 +1,4 @@
-import { namedEntityToHexCode } from "../src/utils/index";
+import { namedEntityToHexCode } from "mjml-solid";
 
 describe("utils", () => {
   describe("namedEntityToHexCode", () => {

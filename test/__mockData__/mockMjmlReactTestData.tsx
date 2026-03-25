@@ -1,7 +1,7 @@
 import { minify as htmlMinify } from "html-minifier";
 import { JSX } from "solid-js";
 
-import * as mjmlComponents from "../../src/mjml";
+import * as mjmlComponents from "mjml-solid";
 
 export const minifyHTML = (html: string) =>
   htmlMinify(html, {

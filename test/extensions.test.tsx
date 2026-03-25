@@ -1,11 +1,13 @@
 import {
+  Mjml,
+  MjmlBody,
   MjmlComment,
   MjmlConditionalComment,
   MjmlYahooStyle,
   MjmlTrackingPixel,
   MjmlHtml,
-} from "../src/extensions";
-import { renderToMjml } from "../src/utils/renderToMjml";
+  renderToMjml,
+} from "mjml-solid";
 
 import { minifyHTML } from "./__mockData__/mockMjmlReactTestData";
 
@@ -23,6 +25,20 @@ describe("extensions", () => {
       expect(minifyHTML(renderToMjml(<MjmlComment />))).toBe("");
       expect(minifyHTML(renderToMjml(<MjmlComment></MjmlComment>))).toBe("");
       expect(minifyHTML(renderToMjml(<MjmlComment></MjmlComment>))).toBe("");
+    });
+
+    it("should render inside a full MJML tree", () => {
+      const email = (
+        <Mjml>
+          <MjmlBody>
+            <MjmlComment comment="Comment tree" />
+          </MjmlBody>
+        </Mjml>
+      );
+
+      expect(minifyHTML(renderToMjml(email))).toContain(
+        "<mj-raw><!--Comment tree--></mj-raw>"
+      );
     });
   });
 

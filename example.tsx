@@ -53,3 +53,5 @@ const { html, json, errors } = renderSolidEmail(
     </Mjml>,
     { validationLevel: "soft" }
 );
+
+console.log(html, json, errors);

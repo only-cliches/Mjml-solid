@@ -1,5 +1,4 @@
-import { Mjml, MjmlHead, MjmlTitle, MjmlBody, MjmlRaw } from "../src";
-import { render } from "../src/utils/render";
+import { Mjml, MjmlHead, MjmlTitle, MjmlBody, MjmlRaw, render } from "mjml-solid";
 
 describe("render()", () => {
   it("should render the HTML", () => {

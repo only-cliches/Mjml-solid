@@ -26,9 +26,7 @@ export function MjmlConditionalComment(
 
   return (
     <Show when={comment && comment.toString().trim().length}>
-      <mj-raw
-        textContent={`<!--[${condition}]>${comment}<![endif]-->`}
-      ></mj-raw>
+      <mj-raw innerHTML={`<!--[${condition}]>${comment ?? ""}<![endif]-->`} />
     </Show>
   );
 }

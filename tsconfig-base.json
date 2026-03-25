@@ -4,7 +4,7 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "lib": ["esnext"],
-    "allowJs": true,
+    "types": ["vitest/globals", "node"],
     "skipLibCheck": true,
 
     "noImplicitAny": true,
@@ -25,6 +25,6 @@
     "resolveJsonModule": true
   },
 
-  "include": ["src/**/*", "test/**/*", "scripts/**/*"],
+  "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules", "dist"]
 }

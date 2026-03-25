@@ -1,6 +1,10 @@
 import { minify as htmlMinify } from "html-minifier";
 import mjml2html from "mjml";
-import { MJMLParsingOptions, MJMLJsonObject, MJMLParseError } from "mjml-core";
+import type {
+  MJMLParsingOptions,
+  MJMLJsonObject,
+  MJMLParseError,
+} from "mjml-core";
 import type { JSX } from "solid-js";
 
 import { renderToMjml } from "./renderToMjml";
