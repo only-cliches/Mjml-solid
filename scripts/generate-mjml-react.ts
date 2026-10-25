@@ -55,7 +55,11 @@ const MJML_COMPONENT_NAMES = MJML_COMPONENTS_TO_GENERATE.map(
 );
 
 const TYPE_OVERRIDE: { [componentName: string]: { [prop: string]: string } } = {
-  mjml: { owa: "string", lang: "string" },
+  mjml: {
+    owa: "string",
+    lang: "string",
+    dir: '"ltr" | "rtl" | "auto"',
+  },
   "mj-style": { inline: "boolean" },
   "mj-class": { name: "string" },
   "mj-table": { cellspacing: "string", cellpadding: "string" },

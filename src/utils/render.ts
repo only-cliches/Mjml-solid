@@ -1,47 +1,30 @@
-import { minify as htmlMinify } from "html-minifier";
 import mjml2html from "mjml";
-import type {
-  MJMLParsingOptions,
-  MJMLJsonObject,
-  MJMLParseError,
-} from "mjml-core";
+import type { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
 import type { JSX } from "solid-js";
 
 import { renderToMjml } from "./renderToMjml";
 
-interface ConvertedHtml {
-  html: string;
-  json?: MJMLJsonObject;
-  errors?: MJMLParseError[];
+export interface RenderOptions extends MJMLParsingOptions {
+  /** Sanitize template variables before MJML 5 processes CSS. */
+  sanitizeStyles?: boolean;
+  /** Allow block and CSS template syntaxes in the same document. */
+  allowMixedSyntax?: boolean;
+  /** Template delimiters recognized when sanitizeStyles is enabled. */
+  templateSyntax?: Array<{ prefix: string; suffix: string }>;
 }
 
-export function render(
+export async function render(
   email: JSX.Element,
-  options: MJMLParsingOptions = {}
-): ConvertedHtml {
-  const defaults: MJMLParsingOptions = {
+  options: RenderOptions = {}
+): Promise<MJMLParseResults> {
+  const defaults: RenderOptions = {
     keepComments: false,
     beautify: false,
     validationLevel: "strict",
   };
 
-  const parseResults: ConvertedHtml = mjml2html(renderToMjml(email), {
+  return mjml2html(await renderToMjml(email), {
     ...defaults,
     ...options,
-    minify: undefined,
   });
-
-  if (options.minify) {
-    return {
-      html: htmlMinify(parseResults.html, {
-        caseSensitive: true,
-        collapseWhitespace: true,
-        minifyCSS: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-      }),
-    };
-  }
-
-  return parseResults;
 }

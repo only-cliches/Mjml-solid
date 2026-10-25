@@ -15,7 +15,6 @@ import {
   namedEntityToHexCode,
   render,
   renderToMjml,
-  renderToMjmlAsync,
 } from "mjml-solid";
 
 describe("README examples", () => {
@@ -47,40 +46,40 @@ describe("README examples", () => {
       </Mjml>
     );
 
-    const mjml = renderToMjml(email);
-    const asyncMjml = await renderToMjmlAsync(email);
-    const { html } = render(email, { validationLevel: "soft" });
+    const mjmlPromise = renderToMjml(email);
+    expect(mjmlPromise).toBeInstanceOf(Promise);
+    const mjml = await mjmlPromise;
+    const { html } = await render(email, { validationLevel: "soft" });
 
     expect(mjml).toContain("<mjml");
     expect(mjml).toContain("<mj-title >Last Minute Offer</mj-title>");
-    expect(asyncMjml).toBe(mjml);
     expect(html).toContain("<title>Last Minute Offer</title>");
     expect(html).toContain("I like it!");
   });
 
-  it("renders the extension examples", () => {
-    expect(renderToMjml(<MjmlComment comment="Built with Solid." />)).toBe(
+  it("renders the extension examples", async () => {
+    expect(await renderToMjml(<MjmlComment comment="Built with Solid." />)).toBe(
       "<mj-raw><!--Built with Solid.--></mj-raw>"
     );
 
     expect(
-      renderToMjml(
+      await renderToMjml(
         <MjmlConditionalComment comment="MSO conditionals" condition="if IE" />
       )
     ).toBe(
       "<mj-raw><!--[if IE]>MSO conditionals<![endif]--></mj-raw>"
     );
 
-    expect(renderToMjml(<MjmlHtml html="<span>Hello World!</span>" />)).toBe(
+    expect(await renderToMjml(<MjmlHtml html="<span>Hello World!</span>" />)).toBe(
       "<mj-raw><span>Hello World!</span></mj-raw>"
     );
 
     expect(
-      renderToMjml(<MjmlTrackingPixel src="tracking-pixel" />)
+      await renderToMjml(<MjmlTrackingPixel src="tracking-pixel" />)
     ).toContain('src="tracking-pixel"');
   });
 
-  it("renders the named entity helper example", () => {
+  it("renders the named entity helper example", async () => {
     expect(namedEntityToHexCode("<div>&apos;</div>")).toBe("<div>&#39;</div>");
   });
 });

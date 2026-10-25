@@ -1,16 +1,12 @@
-import { minify as htmlMinify } from "html-minifier";
 import { JSX } from "solid-js";
 
 import * as mjmlComponents from "mjml-solid";
 
 export const minifyHTML = (html: string) =>
-  htmlMinify(html, {
-    caseSensitive: true,
-    collapseWhitespace: true,
-    minifyCSS: true,
-    removeComments: false,
-    removeEmptyAttributes: true,
-  });
+  html
+    .replace(/>\s+</g, "><")
+    .replace(/(<[^>]*?)\s+>/g, "$1>")
+    .trim();
 
 const {
   Mjml,
@@ -52,7 +48,7 @@ const {
   MjmlHtmlAttribute,
 } = mjmlComponents;
 
-type AllComponents = keyof typeof mjmlComponents;
+type AllComponents = keyof typeof import("../../src/mjml");
 
 type MjmlComponentTest = {
   mjmlReact: JSX.Element;

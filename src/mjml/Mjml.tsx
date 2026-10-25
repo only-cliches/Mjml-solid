@@ -10,6 +10,7 @@ export interface IMjmlProps {
   children?: JSX.Element;
   owa?: string;
   lang?: string;
+  dir?: "ltr" | "rtl" | "auto";
 }
 
 export function Mjml({ children, ...props }: IMjmlProps): JSX.Element {

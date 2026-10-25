@@ -1,43 +1,40 @@
-name: NPM CD workflow
+name: Publish to npm
 
 on:
   push:
-    branches:
-      - main
-      - main-beta
-      - main-alpha
+    tags:
+      - "v*"
 
 jobs:
   runCI:
     uses: ./.github/workflows/CI_PR_merge_checks.yml
-  releaseAndBumpVersion:
+  publish:
     needs: runCI
-    name: Publish the package
+    name: Publish the tagged version
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js 16
-        uses: actions/setup-node@v1
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      - name: Configure Github credentials
-        run: |
-          git config --global user.name "Github"
-          git config --global user.email "github@faire.com"
-
-      - run: |
-          yarn install
-          yarn build-mjml-react
-
-      - name: Run semantic release (release + bump version)
-        run: |
-          cd dist
-          npx semantic-release
+      - name: Verify tag matches package version
         env:
-          HUSKY: 0
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node -e 'const version = require("./package.json").version; if (process.env.RELEASE_TAG !== `v${version}`) { console.error(`Expected tag v${version}, got ${process.env.RELEASE_TAG}`); process.exit(1); }'
+
+      - run: npm install
+      - run: npm test
+      - run: npm run test-dist-skip-build
+
+      - name: Publish package
+        run: npm publish --provenance --access public
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

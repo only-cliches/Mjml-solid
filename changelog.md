@@ -3,6 +3,23 @@
 This changelog is a best-effort summary built from git history and the current uncommitted working tree.
 Some release commits are sparse, so a few entries are inferred from the commits immediately preceding each release marker.
 
+## 1.4.0 - 2026-10-25
+
+### Breaking changes
+
+- `render()` now returns `Promise<MJMLParseResults>` instead of a result directly. Callers must await it; validation failures reject the promise.
+- `renderToMjml()` now returns `Promise<string>` instead of a string, and `renderToMjmlAsync()` has been removed. Replace `renderToMjmlAsync(email)` with `renderToMjml(email)` and await either call.
+- The repository example now has one async `renderSolidEmail()` function. Replace copied calls to `renderSolidEmailAsync()` with `renderSolidEmail()` and await the result.
+- MJML 5 is now required as a peer dependency and Node.js 20 or newer is required at runtime. MJML 5 ignores `mj-include` by default; opt in with `ignoreIncludes: false` and scoped include paths when needed.
+
+### Other changes
+
+- Updated direct dependencies to their latest stable releases, including TypeScript 7, Vitest 5, and Node typings 26.
+- Migrated TypeScript configuration for version 7 and moved the development CI matrix to Node.js 22, 24, and 26.
+- Published Node-compatible ESM modules with matching declarations, and made package packing rebuild the release artifact.
+- Switched minification to MJML 5's built-in htmlnano/cssnano pipeline and preserved the full parse result when minifying.
+- Added MJML 5 component attributes for body IDs, section/wrapper gutters, and social borders; removed the obsolete hero `container-background-color` prop.
+
 ## 1.3.0 - 2026-03-25
 
 - Removed fork-era React tooling and docs that were still lingering in the repo.

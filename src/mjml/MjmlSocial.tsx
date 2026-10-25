@@ -10,6 +10,7 @@ import { convertPropsToMjmlAttributes } from "../utils";
 export interface IMjmlSocialProps {
   /** MJML default value: center */
   align?: "left" | "right" | "center";
+  border?: CSS.Properties["border"];
   borderRadius?: CSS.Properties["borderRadius"];
   containerBackgroundColor?: string;
   /** MJML default value: #333333 */

@@ -1,12 +1,12 @@
 {
   "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "es2015",
-    "outDir": "dist",
-    "declaration": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "module": "ESNext",
+    "target": "esnext",
+    "noEmit": true,
+    "paths": {
+      "mjml-solid": ["./src/index.ts"]
+    }
   },
   "include": ["src/**/*", "test/**/*", "example.tsx"]
 }

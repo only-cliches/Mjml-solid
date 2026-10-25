@@ -1,16 +1,10 @@
 import mjml2html from "mjml";
-import { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
-import { renderToMjml, renderToMjmlAsync } from "./dist/utils/renderToMjml";
-import { JSX } from "solid-js";
+import type { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
+import { renderToMjml } from "./dist/index.js";
+import type { JSX } from "solid-js";
 
-// sync
-export const renderSolidEmail = (email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults => {
-    return mjml2html(renderToMjml(email), options);
-}
-
-// async
-export const renderSolidEmailAsync = async (email: JSX.Element, options?: MJMLParsingOptions ): Promise<MJMLParseResults> => {
-    const mjmlSrc = await renderToMjmlAsync(email);
+export const renderSolidEmail = async (email: JSX.Element, options?: MJMLParsingOptions): Promise<MJMLParseResults> => {
+    const mjmlSrc = await renderToMjml(email);
     return mjml2html(mjmlSrc, options);
 }
 
@@ -24,9 +18,9 @@ import {
     MjmlColumn,
     MjmlButton,
     MjmlImage,
-} from "./dist";
+} from "./dist/index.js";
 
-const { html, json, errors } = renderSolidEmail(
+renderSolidEmail(
     <Mjml>
         <MjmlHead>
             <MjmlTitle>Last Minute Offer</MjmlTitle>
@@ -52,6 +46,9 @@ const { html, json, errors } = renderSolidEmail(
         </MjmlBody>
     </Mjml>,
     { validationLevel: "soft" }
-);
-
-console.log(html, json, errors);
+).then(({ html, json, errors }) => {
+    console.log(html, json, errors);
+}).catch((error: unknown) => {
+    console.error(error);
+    process.exitCode = 1;
+});

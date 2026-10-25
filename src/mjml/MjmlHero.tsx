@@ -17,7 +17,6 @@ export interface IMjmlHeroProps {
   backgroundHeight?: string | number;
   backgroundPosition?: CSS.Properties["backgroundPosition"];
   borderRadius?: CSS.Properties["borderRadius"];
-  containerBackgroundColor?: string;
   innerBackgroundColor?: string;
   innerPadding?: string | number;
   innerPaddingTop?: string | number;

@@ -7,8 +7,23 @@ There is an awesome library [mjml](https://mjml.io/) with github repo here [http
 `MJML` is a markup language created by [Mailjet](https://www.mailjet.com/).
 So in order to create emails on the fly we created a library with `Solid` components.
 
-> This library depends on Solid's `renderToString` method, which is only availble in NodeJS.
+> This library depends on Solid's `renderToStringAsync` method, which is only available in Node.js.
 > It might be possible to run this library in the browser, but it's not supported.
+>
+> MJML 5 and `mjml-solid` require Node.js 20 or newer.
+
+Development and test runs require Node.js 22.12 or newer for Vitest 5.
+
+## Migrating from 1.3.x
+
+Rendering is now asynchronous. `render(email, options)` returns a `Promise<MJMLParseResults>`, and `renderToMjml(email)` returns a `Promise<string>`. Await either call before using its result:
+
+```tsx
+const { html, errors } = await render(email, options);
+const mjmlSource = await renderToMjml(email);
+```
+
+The `renderToMjmlAsync` export has been removed; replace it with `renderToMjml`. If you copied this repository's `renderSolidEmail`/`renderSolidEmailAsync` example, keep one async `renderSolidEmail` function and await its result. MJML 5 also ignores `mj-include` by default; see the [include options](#options) below.
 
 ## Getting Started
 
@@ -20,18 +35,12 @@ npm install mjml-solid mjml solid-js
 
 ```tsx
 import mjml2html from "mjml";
-import { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
-import { renderToMjml, renderToMjmlAsync } from "mjml-solid";
-import { JSX } from "solid-js";
+import type { MJMLParseResults, MJMLParsingOptions } from "mjml-core";
+import { renderToMjml } from "mjml-solid";
+import type { JSX } from "solid-js";
 
-// sync
-export const renderSolidEmail = (email: JSX.Element, options?: MJMLParsingOptions): MJMLParseResults => {
-    return mjml2html(renderToMjml(email), options);
-}
-
-// async
-export const renderSolidEmailAsync = async (email: JSX.Element, options?: MJMLParsingOptions ): Promise<MJMLParseResults> => {
-    const mjmlSrc = await renderToMjmlAsync(email);
+export const renderSolidEmail = async (email: JSX.Element, options?: MJMLParsingOptions): Promise<MJMLParseResults> => {
+    const mjmlSrc = await renderToMjml(email);
     return mjml2html(mjmlSrc, options);
 }
 
@@ -55,7 +64,7 @@ import {
 import { renderSolidEmail } from "./renderSolidEmail";
 
 
-const { html, errors } = renderSolidEmail(
+const { html, errors } = await renderSolidEmail(
     <Mjml>
         <MjmlHead>
             <MjmlTitle>Last Minute Offer</MjmlTitle>
@@ -96,12 +105,13 @@ mjml-solid sets the following MJML options when rendering to HTML:
 {
   keepComments: false,
   beautify: false,
-  minify: true,
   validationLevel: 'strict'
 }
 ```
 
-If you want to override these, you can pass an object to `render` as a second argument. See the [MJML docs](https://documentation.mjml.io/#inside-node-js) for the full list of options you can set.
+If you want to override these, you can pass an object to `render` as a second argument. MJML 5 defaults `minify` to `false`; pass `{ minify: true }` to use its built-in htmlnano/cssnano minifier. See the [MJML docs](https://documentation.mjml.io/#inside-node-js) for the full list of options you can set.
+
+MJML 5 ignores `mj-include` by default. To enable includes, explicitly pass `ignoreIncludes: false` and scope `filePath`/`includePath` to the directories that contain trusted templates.
 
 ## Extensions
 

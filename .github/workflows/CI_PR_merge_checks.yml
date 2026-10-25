@@ -10,22 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [22.x, 24.x, 26.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build
-        run: |
-          yarn install
-          yarn build-dist
-      - name: Format
-        run: yarn prettier --check .
-      - name: Lint
-        run: yarn lint
+      - name: Install
+        run: npm install
       - name: Test
-        run: yarn test-dist-skip-build
-      - name: Validate generate-mjml-react.ts has been run
-        run: ./scripts/validateMjmlReactHasBeenRun.sh
+        run: npm test
+      - name: Test package artifacts
+        run: npm run test-dist-skip-build

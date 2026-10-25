@@ -1,6 +1,6 @@
 {
   "name": "mjml-solid",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "license": "MIT",
   "description": "SolidJS component library to generate the HTML emails on the fly",
   "keywords": [
@@ -35,34 +35,40 @@
   "directories": {
     "test": "test"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig-esm.json && node -e \"const fs=require('fs'); fs.copyFileSync('src/ambient.d.ts', 'dist/ambient.d.ts'); fs.writeFileSync('dist/index.d.ts', 'import \\\"./ambient\\\";\\n' + fs.readFileSync('dist/index.d.ts', 'utf8'));\"",
+    "build": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig-esm.json --emitDeclarationOnly && vite build --config vite.build.config.ts && node scripts/finalize-dist.mjs",
+    "prepack": "npm run build",
     "test": "npm run test:types && vitest run",
-    "test:types": "npm run build && tsc -p tsconfig-types.json --noEmit",
+    "test:types": "npm run build && tsc -p tsconfig.json --noEmit && tsc -p tsconfig-types.json --noEmit && tsc -p tsconfig-types-nodenext.json --noEmit",
     "test-dist-skip-build": "vitest run --config vitest.dist.config.ts",
     "test-dist": "npm run build && npm run test-dist-skip-build"
   },
   "devDependencies": {
-    "@types/html-minifier": "^4.0.2",
-    "@types/mjml": "^4.7.4",
-    "@types/node": "^22.0.0",
-    "mjml": "^4.18.0",
-    "solid-js": "^1.9.11",
-    "vite": "^8.0.2",
-    "vite-plugin-solid": "^2.11.11",
-    "vitest": "^4.1.1",
-    "typescript": "^5.3.3"
+    "@types/node": "^26.6.5",
+    "mjml": "^5.4.1",
+    "solid-js": "^1.9.17",
+    "vite": "^8.3.5",
+    "vite-plugin-solid": "^2.11.14",
+    "vitest": "^5.0.5",
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
-    "mjml": "^4.18.0",
-    "solid-js": "^1.9.11"
+    "mjml": "^5.4.1",
+    "solid-js": "^1.9.17"
   },
   "module": "dist/index.js",
   "dependencies": {
-    "csstype": "^3.1.3"
+    "@types/mjml": "^5.4.1",
+    "csstype": "^3.2.3"
   }
 }

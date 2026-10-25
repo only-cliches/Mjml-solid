@@ -11,6 +11,7 @@ export interface IMjmlBodyProps {
   /** MJML default value: 600px */
   width?: string | number;
   backgroundColor?: CSS.Properties["backgroundColor"];
+  id?: string;
   class?: string;
   cssClass?: string;
   mjmlClass?: string;

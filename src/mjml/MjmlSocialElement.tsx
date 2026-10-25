@@ -14,6 +14,8 @@ export interface IMjmlSocialElementProps {
   backgroundColor?: CSS.Properties["backgroundColor"];
   /** MJML default value: #000 */
   color?: CSS.Properties["color"];
+  /** MJML default value: 0 */
+  border?: CSS.Properties["border"];
   borderRadius?: CSS.Properties["borderRadius"];
   fontFamily?: string;
   fontSize?: string | number;
